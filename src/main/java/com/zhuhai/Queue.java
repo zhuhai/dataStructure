@@ -8,8 +8,8 @@ package com.zhuhai;
  * @author: hai
  */
 public interface Queue<E> {
-    void enQueue(E e);
-    E deQueue();
+    void enqueue(E e);
+    E dequeue();
     E getFront();
     int getSize();
     boolean isEmpty();
