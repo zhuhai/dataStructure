@@ -43,6 +43,14 @@ public class LinkedList<E> {
         this.size = 0;
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
     /**
      * 在指定位置插入元素
      *
