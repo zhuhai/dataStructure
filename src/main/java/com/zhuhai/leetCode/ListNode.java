@@ -1,4 +1,4 @@
-package com.zhuhai;
+package com.zhuhai.leetCode;
 
 /**
  * Created with IntelliJ IDEA
