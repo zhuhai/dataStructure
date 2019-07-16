@@ -190,6 +190,103 @@ public class BST2<E extends Comparable<E>> {
         }
     }
 
+    /**
+     * 获取二叉树的最小元素
+     * @return
+     */
+    public E minimum() {
+        if (size == 0) {
+            throw new IllegalArgumentException("BST is empty.");
+        }
+        return minimum(root).e;
+    }
+
+    /**
+     * 返回以node为根的二叉树的最小值所在的节点
+     * @param node
+     * @return
+     */
+    private Node minimum(Node node) {
+        if (node.left == null) {
+            return node;
+        }
+        return minimum(node.left);
+    }
+
+    /**
+     * 获取二叉树的最大元素
+     * @return
+     */
+    public E maximum() {
+        if (size == 0) {
+            throw new IllegalArgumentException("BST is empty.");
+        }
+        return maximum(root).e;
+    }
+
+    /**
+     * 返回以node的为根的二叉树的最大值所在的节点
+     * @param node
+     * @return
+     */
+    private Node maximum(Node node) {
+        if (node.right == null) {
+            return node;
+        }
+        return maximum(node.right);
+    }
+
+    /**
+     * 删除二叉树最小值所在的节点，返回最小值
+     * @return
+     */
+    public E removeMin() {
+        E ret = minimum();
+        root = removeMin(root);
+        return ret;
+    }
+
+    /**
+     * 删除以node为跟的二叉树最小值所在的节点
+     * @param node
+     * @return 返回删除节点后新的二叉树的根
+     */
+    private Node removeMin(Node node) {
+        if (node.left == null) {
+            Node rightNode = node.right;
+            node.right = null;
+            size--;
+            return rightNode;
+        }
+        node.left = removeMin(node.left);
+        return node;
+    }
+
+    /**
+     * 删除二叉树的最大值所在的节点
+     * @return 返回最大值
+     */
+    public E removeMax() {
+        E ret = maximum();
+        root = removeMax(root);
+        return ret;
+    }
+
+    /**
+     * 删除以node为根的二叉树的最大值所在的节点
+     * @param node
+     * @return 返回删除节点后新的二叉树的根
+     */
+    private Node removeMax(Node node) {
+        if (node.right == null) {
+            Node leftNode = node.left;
+            node.left = null;
+            size--;
+            return leftNode;
+        }
+        node.right = removeMax(node.right);
+        return node;
+    }
 
     @Override
     public String toString() {
@@ -237,6 +334,13 @@ public class BST2<E extends Comparable<E>> {
         System.out.println();
         bst.preOrderNR();
         System.out.println();
+        bst.levelOrder();
+
+        System.out.println("二叉树中最小元素：" + bst.minimum());
+        System.out.println("二叉树中最大元素：" + bst.maximum());
+
+        //bst.removeMin();
+        bst.removeMax();
         bst.levelOrder();
     }
 }
