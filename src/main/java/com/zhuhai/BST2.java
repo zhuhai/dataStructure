@@ -1,5 +1,7 @@
 package com.zhuhai;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -47,6 +49,7 @@ public class BST2<E extends Comparable<E>> {
 
     /**
      * 向以node为根节点的二叉树中插入元素e
+     *
      * @param node
      * @param e
      * @return 插入新节点后二叉树的根
@@ -66,6 +69,7 @@ public class BST2<E extends Comparable<E>> {
 
     /**
      * 查看二叉树中是否含有元素e
+     *
      * @param e
      * @return
      */
@@ -99,8 +103,10 @@ public class BST2<E extends Comparable<E>> {
     public void postOrder() {
         postOrder(root);
     }
+
     /**
      * 前序遍历以node为根的二叉树
+     *
      * @param node
      */
     private void preOrder(Node node) {
@@ -114,6 +120,7 @@ public class BST2<E extends Comparable<E>> {
 
     /**
      * 中序遍历以node为根的二叉树
+     *
      * @param node
      */
     private void inOrder(Node node) {
@@ -127,6 +134,7 @@ public class BST2<E extends Comparable<E>> {
 
     /**
      * 后序遍历以node为根的二叉树
+     *
      * @param node
      */
     private void postOrder(Node node) {
@@ -159,22 +167,41 @@ public class BST2<E extends Comparable<E>> {
             }
         }
 
+    }
 
+    /**
+     * 二叉树层序遍历（广度优先遍历）
+     */
+    public void levelOrder() {
+        if (root == null) {
+            return;
+        }
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        while (!q.isEmpty()) {
+            Node cur = q.remove();
+            System.out.println(cur.e);
+            if (cur.left != null) {
+                q.add(cur.left);
+            }
+            if (cur.right != null) {
+                q.add(cur.right);
+            }
+        }
     }
 
 
-
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder res = new StringBuilder();
         generateBSTString(root, 0, res);
         return res.toString();
     }
 
     // 生成以node为根节点，深度为depth的描述二叉树的字符串
-    private void generateBSTString(Node node, int depth, StringBuilder res){
+    private void generateBSTString(Node node, int depth, StringBuilder res) {
 
-        if(node == null){
+        if (node == null) {
             res.append(generateDepthString(depth) + "null\n");
             return;
         }
@@ -184,9 +211,9 @@ public class BST2<E extends Comparable<E>> {
         generateBSTString(node.right, depth + 1, res);
     }
 
-    private String generateDepthString(int depth){
+    private String generateDepthString(int depth) {
         StringBuilder res = new StringBuilder();
-        for(int i = 0 ; i < depth ; i ++) {
+        for (int i = 0; i < depth; i++) {
             res.append("--");
         }
         return res.toString();
@@ -195,7 +222,7 @@ public class BST2<E extends Comparable<E>> {
     public static void main(String[] args) {
         BST2<Integer> bst = new BST2<>();
         int[] nums = {5, 3, 6, 8, 4, 2};
-        for(int num: nums) {
+        for (int num : nums) {
             bst.add(num);
         }
         /////////////////
@@ -209,5 +236,7 @@ public class BST2<E extends Comparable<E>> {
         bst.preOrder();
         System.out.println();
         bst.preOrderNR();
+        System.out.println();
+        bst.levelOrder();
     }
 }
