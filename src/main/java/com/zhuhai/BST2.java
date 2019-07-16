@@ -1,5 +1,7 @@
 package com.zhuhai;
 
+import java.util.Stack;
+
 /**
  * Created with IntelliJ IDEA
  * Date: 2019/7/15
@@ -123,6 +125,10 @@ public class BST2<E extends Comparable<E>> {
         inOrder(node.right);
     }
 
+    /**
+     * 后序遍历以node为根的二叉树
+     * @param node
+     */
     private void postOrder(Node node) {
         if (node == null) {
             return;
@@ -130,6 +136,30 @@ public class BST2<E extends Comparable<E>> {
         postOrder(node.left);
         postOrder(node.right);
         System.out.println(node.e);
+    }
+
+    /**
+     * 前序遍历非递归实现
+     * 使用栈的方式
+     */
+    public void preOrderNR() {
+        if (root == null) {
+            return;
+        }
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            Node cur = stack.pop();
+            System.out.println(cur.e);
+            if (cur.right != null) {
+                stack.push(cur.right);
+            }
+            if (cur.left != null) {
+                stack.push(cur.left);
+            }
+        }
+
+
     }
 
 
@@ -177,5 +207,7 @@ public class BST2<E extends Comparable<E>> {
         /////////////////
         //System.out.println(bst);
         bst.preOrder();
+        System.out.println();
+        bst.preOrderNR();
     }
 }
