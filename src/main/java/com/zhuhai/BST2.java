@@ -339,8 +339,8 @@ public class BST2<E extends Comparable<E>> {
         System.out.println("二叉树中最小元素：" + bst.minimum());
         System.out.println("二叉树中最大元素：" + bst.maximum());
 
-        //bst.removeMin();
-        bst.removeMax();
+        bst.removeMin();
+        //bst.removeMax();
         bst.levelOrder();
     }
 }
