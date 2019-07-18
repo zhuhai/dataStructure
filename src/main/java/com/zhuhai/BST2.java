@@ -288,6 +288,60 @@ public class BST2<E extends Comparable<E>> {
         return node;
     }
 
+    /**
+     * 删除二叉树中元素为e的节点
+     * @param e
+     */
+    public void remove(E e) {
+        root = remove(root, e);
+    }
+
+    /**
+     * 删除以node为根的二叉树中元素为e的节点，递归算法
+     * @param node
+     * @param e
+     * @return 返回删除节点后新的二叉树的根
+     */
+    private Node remove(Node node, E e) {
+        if (node == null) {
+            return null;
+        }
+        if (e.compareTo(node.e) < 0) {
+            node.left = remove(node.left, e);
+            return node;
+        } else if (e.compareTo(node.e) > 0) {
+            node.right = remove(node.right, e);
+            return node;
+        } else {
+            //待删除节点左子树为null
+            if (node.left == null) {
+                Node rightNode = node.right;
+                node.right = null;
+                size--;
+                return rightNode;
+            }
+            //待删除节点右子树为null
+            if (node.right == null) {
+                Node leftNode = node.left;
+                node.left = null;
+                size--;
+                return leftNode;
+            }
+            //待删除节点左右子树都不为null
+            //找到比待删除节点大的最小节点，即待删除节点右子树的最小节点
+            //用这个节点替代待删除节点的位置
+            Node successor = minimum(node.right);
+            successor.right = removeMin(node.right);
+            successor.left = node.left;
+            node.left = node.right = null;
+            return successor;
+        }
+
+    }
+
+
+
+
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
