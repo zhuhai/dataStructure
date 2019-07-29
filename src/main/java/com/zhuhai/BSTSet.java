@@ -44,9 +44,8 @@ public class BSTSet<E extends Comparable<E>> implements Set<E>{
     public static void main(String[] args) {
 
         System.out.println("Pride and Prejudice");
-
         ArrayList<String> words1 = new ArrayList<>();
-        if(FileOperation.readFile("E:\\workspace\\dataStructure\\src\\main\\java\\pride-and-prejudice.txt", words1)) {
+        if(FileOperation.readFile(BSTSet.class.getClassLoader().getResource("pride-and-prejudice.txt").getFile(), words1)) {
             System.out.println("Total words: " + words1.size());
 
             BSTSet<String> set1 = new BSTSet<>();
