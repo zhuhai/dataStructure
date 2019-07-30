@@ -33,6 +33,14 @@ public class Array<E> {
         this(10);
     }
 
+    public Array(E[] array) {
+        data = (E[]) new Object[array.length];
+        for (int i = 0; i < array.length; i++) {
+            data[i] = array[i];
+        }
+        size = array.length;
+    }
+
     /**
      * 获取数组的容量
      *
@@ -227,6 +235,16 @@ public class Array<E> {
         }
         data = newData;
     }
+
+    public void swap(int i, int j) {
+        if (i < 0 || i >= size || j < 0 || j >= size) {
+            throw new IllegalArgumentException("index is illegal.");
+        }
+        E e = data[i];
+        data[i] = data[j];
+        data[j] = e;
+    }
+
 
     @Override
     public String toString() {
